@@ -48,8 +48,21 @@ const database = client.db("paintStore");
       console.log(result);
       res.send(result);
 })
+    app.post("/TopCategory", async (req, res) => {
+      console.log(req.body);
+      const result = await productCollection.insertOne(req.body);
+      console.log(result);
+      res.send(result);
+})
 
 
+    
+    app.get("/myArtAndCraft/:email", async (req, res) => {
+      console.log(req.params.email);
+      const result = await productCollection.find({ email: req.params.email }).toArray();
+      res.send(result);
+    })
+    
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
